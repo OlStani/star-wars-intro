@@ -126,8 +126,8 @@ body {
 }
 @media (max-width: 576px) {
   .header__burgerMenu {
-    right: 8%;
-    top: 8%;
+    right: 5px;
+    top: 5px;
   }
 }
 
