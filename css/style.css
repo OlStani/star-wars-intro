@@ -178,6 +178,18 @@ body {
   }
 }
 
+.nav__list_item:focus span {
+  color: red;
+}
+
+.nav__list_item:hover span {
+  text-decoration: underline;
+}
+
+.nav__list_item:active span {
+  color: rgb(209, 188, 149);
+}
+
 .introText {
   position: absolute;
   width: 100%;
