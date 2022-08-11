@@ -23,9 +23,10 @@ function burgerMenuOpen(event) {
 
 function generateText(episodeId) {
     const { title, subTitle, text } = episodes.find(({ id }) => episodeId === id);
-    const storyText = `<div class="introText_wrapper"><h2>${title}</h2>
+    const storyText = `<div class="introText_wrapper">
+                        <h2>${title}</h2>
                         <h3>${subTitle}</h3>
-                        ${text.reduce((a, b) => `<p>${a}</p> + <p>${b}</p>`)}
+                        ${text.reduce((a, b) => `<p>${a}</p><p>${b}</p>`)}
                         </div>`;
     return storyText;
 };
