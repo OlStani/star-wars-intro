@@ -1,37 +1,25 @@
 import episodes from './text-episode.js';
 
-const body = document.querySelector('body')
+const bodyWrap = document.querySelector('body');
 const menuList = document.querySelector('.nav__list');
 const introText = document.querySelector('.introText');
 const burgerBtn = document.querySelector('.header__burgerMenu');
+
 const style = {
     activeMenu: 'nav__listOpen',
-    changeBurgerIkon: 'burgerCross',
+    changeBurgerIcon: 'burgerCross',
+    burgerBtn: '.header__burgerMenu',
 };
-
-document.addEventListener('DOMContentLoaded', start);
-
-function start() {
-    body.addEventListener('click', (event) => {
-        const episodeName = event.target.closest('.nav__list_item');
-        if (episodeName) {
-            const content = generateText(episodeName.dataset.id);
-            addContent(content, introText);
-        };
-        burgerMenuOpen(event);
-    })
-}
 
 function burgerMenuOpen(event) {
-    if (event.target.closest('.header__burgerMenu')) {
+    if (event.target.closest(style.burgerBtn)) {
         menuList.classList.toggle(style.activeMenu);
-        burgerBtn.classList.toggle(style.changeBurgerIkon);
-    };
-    if (!event.target.closest('.header__burgerMenu')) {
+        burgerBtn.classList.toggle(style.changeBurgerIcon);
+    } else {
         menuList.classList.remove(style.activeMenu);
-        burgerBtn.classList.remove(style.changeBurgerIkon);
-    };
-};
+        burgerBtn.classList.remove(style.changeBurgerIcon);
+    }
+}
 
 function generateText(episodeId) {
     const { title, subTitle, text } = episodes.find(({ id }) => episodeId === id);
@@ -49,10 +37,22 @@ const navList = episodes.reduce((list, { id, title, subTitle }) => {
             <span class="listTitle">${title}</span>
             <span class="listSubTitle">${subTitle}</span>
         </button>
-    </li>`
-}, '');
+    </li>`}, '');
 
 function addContent(content, target) {
     target.innerHTML = content;
 };
-addContent(navList, menuList);
+
+function start() {
+    bodyWrap.addEventListener('click', (event) => {
+        const episodeName = event.target.closest('.nav__list_item');
+        if (episodeName) {
+            const content = generateText(episodeName.dataset.id);
+            addContent(content, introText);
+        };
+        burgerMenuOpen(event);
+    })
+    addContent(navList, menuList);
+}
+
+document.addEventListener('DOMContentLoaded', start);
